@@ -44,12 +44,27 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
 
+
+var vote = { options: [1, 1, 1, 1] };
+
 var io = require('socket.io').listen(server);
 
 io.sockets.on('connection', function(socket){
   socket.on('vote', function(data) {
     console.log(data);
-    socket.emit('refresh', data);
-    socket.broadcast.emit('refresh', data);
+    
+    // Added    
+    var jData = JSON.parse(data);
+    vote.options[jData.id] += 1;
+    console.log(vote);
+    
+    socket.emit('refresh', JSON.stringify(vote));
+    socket.broadcast.emit('refresh', JSON.stringify(vote));
   });
+  
+  socket.on('send chat', function(data){
+    socket.emit('rec chat', data);
+    socket.broadcast.emit('rec chat', data); 
+  });
+  
 });
