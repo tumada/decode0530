@@ -1,5 +1,5 @@
 
-var svg = d3.select("body")
+var svg = d3.select("#graph")
 	.append("svg")
 	.append("g");
 
@@ -10,8 +10,8 @@ svg.append("g")
 svg.append("g")
 	.attr("class", "lines");
 
-var width = 560,
-	height = 250,
+var width = 300,
+	height = 300,
 	radius = Math.min(width, height) / 2;
 
 var pie = d3.layout.pie()
