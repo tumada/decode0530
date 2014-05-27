@@ -14,6 +14,7 @@ $('#messageBox').change(function(){
 	$('#messageBox').val('');
 });
 
+
 socket.on('refresh', function(data) {
 	var jData = JSON.parse(data);
 	$('#chat').prepend(jData.message + '<br />');
